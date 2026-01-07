@@ -98,7 +98,7 @@
             "uid": "PAE45454D0EDB9216"
           },
           "editorMode": "code",
-          "expr": "node_filesystem_avail_bytes{fstype=\"zfs\",instance=\"pve-heavy\", mountpoint=\"/primary\"}",
+          "expr": "truenas_pool_free_bytes{pool_name=\"primary\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -199,7 +199,7 @@
             "uid": "PAE45454D0EDB9216"
           },
           "editorMode": "code",
-          "expr": "node_filesystem_avail_bytes{fstype=\"zfs\",instance=\"pve-heavy\", mountpoint=\"/primary\"}",
+          "expr": "truenas_pool_free_bytes{pool_name=\"primary\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -209,12 +209,186 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PAE45454D0EDB9216"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1099511627776
+              },
+              {
+                "color": "green",
+                "value": 2199023255552
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 0,
+        "y": 9
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PAE45454D0EDB9216"
+          },
+          "editorMode": "code",
+          "expr": "1 - (truenas_pool_free_bytes{pool_name=\"primary\"} / truenas_pool_size_bytes{pool_name=\"primary\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "ZFS Array Percent Used",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PAE45454D0EDB9216"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1099511627776
+              },
+              {
+                "color": "green",
+                "value": 2199023255552
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 3,
+        "y": 9
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PAE45454D0EDB9216"
+          },
+          "editorMode": "code",
+          "expr": "1 - (truenas_pool_free_bytes{pool_name=\"primary\"} / truenas_pool_size_bytes{pool_name=\"primary\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "ZFS Array Percent Used",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 17
       },
       "id": 9,
       "panels": [],
@@ -266,7 +440,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 10
+        "y": 18
       },
       "id": 1,
       "options": {
@@ -397,7 +571,7 @@
         "h": 8,
         "w": 12,
         "x": 3,
-        "y": 10
+        "y": 18
       },
       "id": 6,
       "options": {
@@ -439,7 +613,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 26
       },
       "id": 8,
       "panels": [],
@@ -477,7 +651,7 @@
         "h": 7,
         "w": 3,
         "x": 0,
-        "y": 19
+        "y": 27
       },
       "id": 5,
       "options": {
@@ -549,7 +723,7 @@
         "h": 7,
         "w": 3,
         "x": 3,
-        "y": 19
+        "y": 27
       },
       "id": 2,
       "options": {
@@ -621,7 +795,7 @@
         "h": 7,
         "w": 3,
         "x": 0,
-        "y": 26
+        "y": 34
       },
       "id": 3,
       "options": {
@@ -693,7 +867,7 @@
         "h": 7,
         "w": 3,
         "x": 3,
-        "y": 26
+        "y": 34
       },
       "id": 4,
       "options": {
@@ -749,6 +923,6 @@
   "timezone": "browser",
   "title": "Media",
   "uid": "af94dfryqrk00c",
-  "version": 17,
+  "version": 18,
   "weekStart": ""
 }
